@@ -100,14 +100,12 @@ func NewConflictErr(message *string, errors *[]Error) *Error {
 
 func NewServerErr(message *string, errors *[]Error) *Error {
 	var status int16 = 500
-
 	err := &Error{
 		Key:     "SERVER_ERROR",
 		Message: "Opps, Something went wrong...",
 		Errors:  errors,
 		Status:  &status,
 	}
-
 	if message != nil {
 		err.Message = fmt.Sprintf("conflict: %s", *message)
 	}
