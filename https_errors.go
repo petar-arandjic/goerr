@@ -1,6 +1,9 @@
 package goerr
 
-import "fmt"
+import (
+	"fmt"
+	"log"
+)
 
 func NewBadRequestErr(message *string, errors *[]Error) *Error {
 	var status int16 = 400
@@ -98,7 +101,12 @@ func NewConflictErr(message *string, errors *[]Error) *Error {
 	return err
 }
 
-func NewServerErr(message *string, errors *[]Error) *Error {
+func NewServerErr(message *string, errors *[]Error, logMessage *string) *Error {
+
+	if logMessage != nil {
+		log.Print(logMessage)
+	}
+
 	var status int16 = 500
 	err := &Error{
 		Key:     "SERVER_ERROR",
